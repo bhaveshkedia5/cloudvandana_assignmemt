@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #807d7d;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    #calculator {
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      overflow: hidden;
+      width: 300px;
+    }
+
+    #result {
+      font-size: 24px;
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+        position: absolute;
+    }
+
+    #buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    #clear {
+        display: flex;
+        justify-content: right;
+    }
+
+    button {
+      font-size: 18px;
+      padding: 15px;
+      border: none;
+      cursor: pointer;
+      background-color: #242424;
+      color: #fff;
+    }
+
+    button.operator {
+      background-color: #8b8b8b;
+      color: #fff;
+    }
+
+    button.double {
+      font-size: 18px;
+      padding: 15px;
+      border: none;
+      cursor: pointer;
+      background-color: #242424;
+      color: #fff;
+    }
+
+    button.clear {
+      background-color: #028137;
+      color: #fff;
+      width: 75px;
+    }
+  </style>
+</head>
+<body>
+
+<div id="calculator">
+  
+  <div id="result">0</div>
+  <div id="clear">
+    <button onclick="clearResult()" class="clear">AC</button></div>
+  <div id="buttons">
+    <button onclick="appendSymbol('9')">9</button>
+    <button onclick="appendSymbol('8')">8</button>
+    <button onclick="appendSymbol('7')">7</button>
+    <button onclick="appendSymbol('+')" class="operator">+</button>
+    <button onclick="appendSymbol('4')">4</button>
+    <button onclick="appendSymbol('5')">5</button>
+    <button onclick="appendSymbol('6')">6</button>
+    <button onclick="appendSymbol('-')" class="operator">-</button>
+    <button onclick="appendSymbol('1')">1</button>
+    <button onclick="appendSymbol('2')">2</button>
+    <button onclick="appendSymbol('3')">3</button>
+    <button onclick="appendSymbol('/')" class="operator">/</button>
+    <button onclick="appendSymbol('.')">.</button>
+    <button onclick="appendSymbol('0')" class="double">0</button>
+    <button onclick="calculateResult()" class="operator double">=</button>
+    <button onclick="appendSymbol('*')" class="operator">*</button>
+  </div>
+</div>
+
+<script>
+  let currentInput = '0';
+
+  function clearResult() {
+    currentInput = '0';
+    updateResult();
+  }
+
+  function appendSymbol(symbol) {
+    if (currentInput === '0') {
+      currentInput = symbol;
+    } else {
+      currentInput += symbol;
+    }
+    updateResult();
+  }
+
+  function calculateResult() {
+    try {
+      currentInput = eval(currentInput).toString();
+    } catch (error) {
+      currentInput = 'Error';
+    }
+    updateResult();
+  }
+
+  function updateResult() {
+    document.getElementById('result').textContent = currentInput;
+  }
+</script>
+
+</body>
+</html>
